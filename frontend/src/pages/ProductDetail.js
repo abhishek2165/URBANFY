@@ -687,7 +687,14 @@ const ProductDetail = () => {
 // SIMILAR PRODUCT CARD
 // ============================================
 const SimilarProductCard = ({ product }) => {
+  const { addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
+
   const handleAdd = () => {
+    if (product.stock <= 0) {
+      toast.error("Product is out of stock");
+      return;
+    }
     addToCart(product, 1);
     toast.success(`${product.name} added to cart!`);
   };
@@ -728,14 +735,20 @@ const SimilarProductCard = ({ product }) => {
             <span className="product-original-price">₹{product.price}</span>
           )}
         </div>
-        <motion.button
-          className="add-to-cart-btn"
-          onClick={handleAdd}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          <FiShoppingBag /> Add to Cart
-        </motion.button>
+        {product.stock > 0 ? (
+          <motion.button
+            className="add-to-cart-btn"
+            onClick={handleAdd}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <FiShoppingBag /> Add to Cart
+          </motion.button>
+        ) : (
+          <button className="add-to-cart-btn out-of-stock-btn" disabled>
+            Out of Stock
+          </button>
+        )}
       </div>
     </div>
   );
