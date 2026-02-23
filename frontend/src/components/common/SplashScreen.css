@@ -1,0 +1,383 @@
+/* ============================================
+   URBUNFY PREMIUM SPLASH SCREEN
+   ============================================ */
+
+.splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  overflow: hidden;
+}
+
+/* ============================================
+   BACKGROUND PARTICLES
+   ============================================ */
+.splash-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(212, 175, 55, 0.3);
+  border-radius: 50%;
+  animation: floatParticle linear infinite;
+}
+
+.particle:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.15);
+  width: 2px;
+  height: 2px;
+}
+
+@keyframes floatParticle {
+  0% {
+    transform: translateY(0) translateX(0) scale(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  80% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(50px) scale(0);
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   GLOW EFFECT
+   ============================================ */
+.splash-glow {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(
+    circle,
+    rgba(212, 175, 55, 0.08) 0%,
+    rgba(212, 175, 55, 0.02) 40%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+.splash-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  z-index: 2;
+}
+
+/* ============================================
+   PERFUME BOTTLE ICON
+   ============================================ */
+.splash-icon {
+  margin-bottom: 10px;
+}
+
+.perfume-bottle {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bottle-cap {
+  width: 16px;
+  height: 12px;
+  background: linear-gradient(135deg, #d4af37, #f5d061);
+  border-radius: 3px 3px 0 0;
+  position: relative;
+  z-index: 2;
+}
+
+.bottle-cap::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #d4af37, #f5d061);
+  border-radius: 50%;
+}
+
+.bottle-neck {
+  width: 10px;
+  height: 14px;
+  background: linear-gradient(
+    180deg,
+    rgba(212, 175, 55, 0.6),
+    rgba(212, 175, 55, 0.3)
+  );
+  border-left: 1px solid rgba(212, 175, 55, 0.4);
+  border-right: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+.bottle-body {
+  width: 52px;
+  height: 70px;
+  background: linear-gradient(
+    135deg,
+    rgba(20, 20, 20, 0.9),
+    rgba(40, 40, 40, 0.9)
+  );
+  border: 1.5px solid rgba(212, 175, 55, 0.5);
+  border-radius: 4px 4px 8px 8px;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 0 20px rgba(212, 175, 55, 0.15),
+    inset 0 0 15px rgba(212, 175, 55, 0.05);
+}
+
+.bottle-liquid {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(212, 175, 55, 0.2),
+    rgba(212, 175, 55, 0.4)
+  );
+  animation: fillBottle 2s ease-out 0.5s forwards;
+  border-radius: 0 0 6px 6px;
+}
+
+@keyframes fillBottle {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 75%;
+  }
+}
+
+.bottle-shine {
+  position: absolute;
+  top: 5px;
+  left: 6px;
+  width: 8px;
+  height: 30px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent);
+  border-radius: 4px;
+  transform: skewX(-5deg);
+}
+
+/* ============================================
+   BRAND NAME
+   ============================================ */
+.splash-brand {
+  text-align: center;
+}
+
+.splash-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: 14px;
+  margin: 0;
+  display: flex;
+  gap: 2px;
+}
+
+.splash-letter {
+  display: inline-block;
+  background: linear-gradient(
+    135deg,
+    #d4af37 0%,
+    #f5d061 25%,
+    #d4af37 50%,
+    #b8960c 75%,
+    #d4af37 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.splash-tagline {
+  font-size: 0.85rem;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: rgba(212, 175, 55, 0.6);
+  margin-top: 8px;
+  font-weight: 300;
+}
+
+/* ============================================
+   LOADING BAR
+   ============================================ */
+.splash-loader {
+  width: 280px;
+  margin-top: 20px;
+}
+
+.loader-track {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.loader-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #d4af37, #f5d061, #d4af37);
+  background-size: 200% 100%;
+  border-radius: 10px;
+  animation: loaderShimmer 1.5s linear infinite;
+  position: relative;
+}
+
+.loader-fill::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -2px;
+  width: 6px;
+  height: 6px;
+  background: #f5d061;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+}
+
+@keyframes loaderShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.loader-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.loader-status {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.loader-percent {
+  font-size: 0.72rem;
+  color: rgba(212, 175, 55, 0.5);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* ============================================
+   BOTTOM LINE
+   ============================================ */
+.splash-bottom-line {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 175, 55, 0.4),
+    transparent
+  );
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  .splash-title {
+    font-size: 2.5rem;
+    letter-spacing: 10px;
+  }
+
+  .splash-tagline {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+  }
+
+  .splash-loader {
+    width: 220px;
+  }
+
+  .bottle-body {
+    width: 44px;
+    height: 58px;
+  }
+
+  .splash-glow {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .splash-title {
+    font-size: 2rem;
+    letter-spacing: 8px;
+  }
+
+  .splash-tagline {
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+  }
+
+  .splash-loader {
+    width: 180px;
+  }
+}

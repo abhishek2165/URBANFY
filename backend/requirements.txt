@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+sqlalchemy
+pymysql
+python-dotenv
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt
+python-multipart
+pydantic
+pydantic-settings
+email-validator
+cryptography
+aiofiles
+razorpay
+requests
+httpx

@@ -1,0 +1,635 @@
+/* ============================================
+   PRODUCTS TOOLBAR
+   ============================================ */
+.products-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.product-count {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.filter-toggle-mobile {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid var(--medium-gray);
+  border-radius: 8px;
+  background: var(--white);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-toggle-mobile:hover {
+  border-color: var(--accent);
+}
+
+/* Sort */
+.sort-select {
+  border: 1px solid var(--medium-gray);
+  border-radius: 8px;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  padding: 8px 35px 8px 12px;
+  color: var(--text-dark);
+  cursor: pointer;
+  min-width: 170px;
+  transition: var(--transition);
+}
+
+.sort-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.1);
+}
+
+/* View Toggle */
+.view-toggle {
+  display: flex;
+  border: 1px solid var(--medium-gray);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.view-btn {
+  padding: 8px 12px;
+  border: none;
+  background: var(--white);
+  color: var(--text-light);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.view-btn.active {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.view-btn:not(:last-child) {
+  border-right: 1px solid var(--medium-gray);
+}
+
+/* ============================================
+   ACTIVE FILTERS TAGS
+   ============================================ */
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.filter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: var(--off-white);
+  border: 1px solid var(--medium-gray);
+  border-radius: 20px;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  color: var(--text-medium);
+}
+
+.filter-tag svg {
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  transition: var(--transition);
+}
+
+.filter-tag svg:hover {
+  color: var(--secondary);
+}
+
+/* ============================================
+   FILTER SIDEBAR
+   ============================================ */
+.filter-sidebar {
+  background: var(--white);
+  border: 1px solid var(--light-gray);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  position: sticky;
+  top: 120px;
+}
+
+.filter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.filter-header h5 {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.clear-filters-btn {
+  background: none;
+  border: none;
+  color: var(--secondary);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.clear-filters-btn:hover {
+  text-decoration: underline;
+}
+
+.filter-close-mobile {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--text-dark);
+}
+
+/* Filter Groups */
+.filter-group {
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.filter-group:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.filter-title {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+}
+
+/* Search in Filter */
+.filter-search {
+  position: relative;
+}
+
+.filter-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.filter-search-input {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  border: 1px solid var(--medium-gray);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  transition: var(--transition);
+  outline: none;
+}
+
+.filter-search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.1);
+}
+
+/* Price Inputs */
+.price-inputs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.price-input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid var(--medium-gray);
+  border-radius: 8px;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  outline: none;
+  transition: var(--transition);
+}
+
+.price-input:focus {
+  border-color: var(--accent);
+}
+
+.price-separator {
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+
+.apply-price-btn {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background: var(--primary);
+  color: var(--white);
+  border-radius: 8px;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.apply-price-btn:hover {
+  background: var(--primary-light);
+}
+
+/* Filter Options (Radio) */
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 5px 0;
+}
+
+.filter-option input[type="radio"] {
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.filter-option-label {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--text-medium);
+}
+
+/* Quick Filters */
+.quick-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.quick-filter-btn {
+  padding: 6px 12px;
+  border: 1px solid var(--medium-gray);
+  border-radius: 20px;
+  background: var(--white);
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--text-medium);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.quick-filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(201, 169, 110, 0.05);
+}
+
+/* ============================================
+   LIST VIEW CARD
+   ============================================ */
+.product-card-list {
+  background: var(--white);
+  border: 1px solid var(--light-gray);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: var(--transition);
+  margin-bottom: 5px;
+}
+
+.product-card-list:hover {
+  box-shadow: var(--shadow-md);
+  border-color: transparent;
+}
+
+.list-image-wrapper {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  background: var(--off-white);
+}
+
+.list-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-slow);
+}
+
+.product-card-list:hover .list-image-wrapper img {
+  transform: scale(1.05);
+}
+
+.list-product-info {
+  padding: 20px 25px;
+}
+
+.list-description {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.list-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.list-cart-btn {
+  width: auto !important;
+  padding: 10px 24px !important;
+}
+
+/* Product Volume */
+.product-volume {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--text-light);
+  background: var(--off-white);
+  padding: 3px 10px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+/* ============================================
+   PAGINATION
+   ============================================ */
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 40px;
+  padding: 20px 0;
+}
+
+.page-btn {
+  padding: 8px 16px;
+  border: 1px solid var(--medium-gray);
+  border-radius: 8px;
+  background: var(--white);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--text-medium);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.page-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.page-btn.active {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+}
+
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ============================================
+   FILTER OVERLAY (Mobile)
+   ============================================ */
+.filter-overlay {
+  display: none;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 991px) {
+  .filter-sidebar {
+    position: fixed;
+    top: 0;
+    left: -320px;
+    bottom: 0;
+    width: 300px;
+    z-index: 1100;
+    border-radius: 0;
+    overflow-y: auto;
+    transition: left 0.3s ease;
+    border: none;
+    box-shadow: var(--shadow-xl);
+  }
+
+  .filter-sidebar.mobile-open {
+    left: 0;
+  }
+
+  .filter-close-mobile {
+    display: block;
+  }
+
+  .filter-toggle-mobile {
+    display: flex;
+  }
+
+  .filter-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+  }
+}
+
+@media (max-width: 768px) {
+  .products-toolbar {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .sort-select {
+    min-width: 140px;
+    font-size: 0.8rem;
+  }
+
+  .view-toggle {
+    display: none;
+  }
+
+  .list-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .list-cart-btn {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .pagination-wrapper {
+    flex-wrap: wrap;
+  }
+
+  .page-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+}
+/* ============================================
+   STOCK STATUS STYLES
+   ============================================ */
+
+/* Stock Status Text on Card */
+.product-stock-status {
+  margin: 6px 0 10px 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.product-stock-status.in-stock span {
+  color: #27ae60 !important;
+}
+
+.product-stock-status.low-stock span {
+  color: #e67e22 !important;
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+.product-stock-status.out-of-stock span {
+  color: #e74c3c !important;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Out of Stock Overlay on Image */
+.out-of-stock-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  border-radius: inherit;
+}
+
+.out-of-stock-overlay span {
+  background: #e74c3c;
+  color: white;
+  padding: 8px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+/* Low Stock Badge */
+.stock-badge-low {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ff6b35;
+  color: white;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 20px;
+  z-index: 4;
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+/* Out of Stock Card Styling */
+.product-out-of-stock {
+  opacity: 0.85;
+  position: relative;
+}
+
+.product-out-of-stock .product-info {
+  opacity: 0.7;
+}
+
+/* Out of Stock Button */
+.out-of-stock-btn {
+  background: #ccc !important;
+  color: #777 !important;
+  cursor: not-allowed !important;
+  border: 1px solid #ddd !important;
+}
+
+.out-of-stock-btn:hover {
+  background: #ccc !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Product Image Wrapper - position relative for overlay */
+.product-image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.list-image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
