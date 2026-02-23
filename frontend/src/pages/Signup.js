@@ -1,23 +1,29 @@
-import React, { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Container, Row, Col } from 'react-bootstrap';
-import { motion } from 'framer-motion';
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
+import { motion } from "framer-motion";
 import {
-  FiUser, FiMail, FiLock, FiPhone,
-  FiEye, FiEyeOff, FiArrowRight
-} from 'react-icons/fi';
-import { useAuth } from '../context/AuthContext';
-import { toast } from 'react-toastify';
-import './Auth.css';
+  FiUser,
+  FiMail,
+  FiLock,
+  FiPhone,
+  FiEye,
+  FiEyeOff,
+  FiArrowRight,
+} from "react-icons/fi";
+import { useAuth } from "../context/AuthContext";
+import { toast } from "react-toastify";
+import "./Auth.css";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
-    first_name: '',
-    last_name: '',
-    email: '',
-    password: '',
-    confirm_password: '',
-    phone: '8999323926',
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    confirm_password: "",
+    phone: "8999323926",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -27,49 +33,49 @@ const Signup = () => {
   const { signup } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from || '/';
+  const from = location.state?.from || "/";
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    setErrors({ ...errors, [name]: '' });
+    setErrors({ ...errors, [name]: "" });
   };
 
   const validate = () => {
     const newErrors = {};
 
     if (!formData.first_name.trim()) {
-      newErrors.first_name = 'First name is required';
+      newErrors.first_name = "First name is required";
     } else if (formData.first_name.trim().length < 2) {
-      newErrors.first_name = 'First name must be at least 2 characters';
+      newErrors.first_name = "First name must be at least 2 characters";
     }
 
     if (!formData.last_name.trim()) {
-      newErrors.last_name = 'Last name is required';
+      newErrors.last_name = "Last name is required";
     } else if (formData.last_name.trim().length < 2) {
-      newErrors.last_name = 'Last name must be at least 2 characters';
+      newErrors.last_name = "Last name must be at least 2 characters";
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Invalid email format';
+      newErrors.email = "Invalid email format";
     }
 
     if (!formData.password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = "Password is required";
     } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
+      newErrors.password = "Password must be at least 6 characters";
     }
 
     if (!formData.confirm_password) {
-      newErrors.confirm_password = 'Please confirm your password';
+      newErrors.confirm_password = "Please confirm your password";
     } else if (formData.password !== formData.confirm_password) {
-      newErrors.confirm_password = 'Passwords do not match';
+      newErrors.confirm_password = "Passwords do not match";
     }
 
     if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone number is required';
+      newErrors.phone = "Phone number is required";
     }
 
     setErrors(newErrors);
@@ -95,10 +101,10 @@ const Signup = () => {
         toast.success(`Welcome to URBANFY, ${result.user.first_name}!`);
         navigate(from, { replace: true });
       } else {
-        toast.error(result.message || 'Signup failed');
+        toast.error(result.message || "Signup failed");
       }
     } catch (error) {
-      toast.error('Something went wrong. Please try again.');
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -117,9 +123,13 @@ const Signup = () => {
             >
               {/* Header */}
               <div className="auth-header">
-                <Link to="/" className="auth-brand">URBANFY</Link>
+                <Link to="/" className="auth-brand">
+                  URBANFY
+                </Link>
                 <h2 className="auth-title">Create Account</h2>
-                <p className="auth-subtitle">Join URBANFY for exclusive deals and premium fragrances</p>
+                <p className="auth-subtitle">
+                  Join URBANFY for exclusive deals and premium fragrances
+                </p>
               </div>
 
               {/* Form */}
@@ -129,7 +139,9 @@ const Signup = () => {
                   <Col xs={6}>
                     <div className="auth-field">
                       <label className="auth-label">First Name</label>
-                      <div className={`auth-input-wrapper ${errors.first_name ? 'error' : ''}`}>
+                      <div
+                        className={`auth-input-wrapper ${errors.first_name ? "error" : ""}`}
+                      >
                         <FiUser className="auth-input-icon" />
                         <input
                           type="text"
@@ -140,13 +152,17 @@ const Signup = () => {
                           className="auth-input"
                         />
                       </div>
-                      {errors.first_name && <span className="auth-error">{errors.first_name}</span>}
+                      {errors.first_name && (
+                        <span className="auth-error">{errors.first_name}</span>
+                      )}
                     </div>
                   </Col>
                   <Col xs={6}>
                     <div className="auth-field">
                       <label className="auth-label">Last Name</label>
-                      <div className={`auth-input-wrapper ${errors.last_name ? 'error' : ''}`}>
+                      <div
+                        className={`auth-input-wrapper ${errors.last_name ? "error" : ""}`}
+                      >
                         <FiUser className="auth-input-icon" />
                         <input
                           type="text"
@@ -157,7 +173,9 @@ const Signup = () => {
                           className="auth-input"
                         />
                       </div>
-                      {errors.last_name && <span className="auth-error">{errors.last_name}</span>}
+                      {errors.last_name && (
+                        <span className="auth-error">{errors.last_name}</span>
+                      )}
                     </div>
                   </Col>
                 </Row>
@@ -165,7 +183,9 @@ const Signup = () => {
                 {/* Email */}
                 <div className="auth-field">
                   <label className="auth-label">Email Address</label>
-                  <div className={`auth-input-wrapper ${errors.email ? 'error' : ''}`}>
+                  <div
+                    className={`auth-input-wrapper ${errors.email ? "error" : ""}`}
+                  >
                     <FiMail className="auth-input-icon" />
                     <input
                       type="email"
@@ -176,13 +196,17 @@ const Signup = () => {
                       className="auth-input"
                     />
                   </div>
-                  {errors.email && <span className="auth-error">{errors.email}</span>}
+                  {errors.email && (
+                    <span className="auth-error">{errors.email}</span>
+                  )}
                 </div>
 
                 {/* Phone */}
                 <div className="auth-field">
                   <label className="auth-label">Phone Number</label>
-                  <div className={`auth-input-wrapper ${errors.phone ? 'error' : ''}`}>
+                  <div
+                    className={`auth-input-wrapper ${errors.phone ? "error" : ""}`}
+                  >
                     <FiPhone className="auth-input-icon" />
                     <input
                       type="tel"
@@ -193,16 +217,20 @@ const Signup = () => {
                       className="auth-input"
                     />
                   </div>
-                  {errors.phone && <span className="auth-error">{errors.phone}</span>}
+                  {errors.phone && (
+                    <span className="auth-error">{errors.phone}</span>
+                  )}
                 </div>
 
                 {/* Password */}
                 <div className="auth-field">
                   <label className="auth-label">Password</label>
-                  <div className={`auth-input-wrapper ${errors.password ? 'error' : ''}`}>
+                  <div
+                    className={`auth-input-wrapper ${errors.password ? "error" : ""}`}
+                  >
                     <FiLock className="auth-input-icon" />
                     <input
-                      type={showPassword ? 'text' : 'password'}
+                      type={showPassword ? "text" : "password"}
                       name="password"
                       placeholder="Create a password"
                       value={formData.password}
@@ -217,16 +245,20 @@ const Signup = () => {
                       {showPassword ? <FiEyeOff /> : <FiEye />}
                     </button>
                   </div>
-                  {errors.password && <span className="auth-error">{errors.password}</span>}
+                  {errors.password && (
+                    <span className="auth-error">{errors.password}</span>
+                  )}
                 </div>
 
                 {/* Confirm Password */}
                 <div className="auth-field">
                   <label className="auth-label">Confirm Password</label>
-                  <div className={`auth-input-wrapper ${errors.confirm_password ? 'error' : ''}`}>
+                  <div
+                    className={`auth-input-wrapper ${errors.confirm_password ? "error" : ""}`}
+                  >
                     <FiLock className="auth-input-icon" />
                     <input
-                      type={showConfirm ? 'text' : 'password'}
+                      type={showConfirm ? "text" : "password"}
                       name="confirm_password"
                       placeholder="Confirm your password"
                       value={formData.confirm_password}
@@ -241,7 +273,11 @@ const Signup = () => {
                       {showConfirm ? <FiEyeOff /> : <FiEye />}
                     </button>
                   </div>
-                  {errors.confirm_password && <span className="auth-error">{errors.confirm_password}</span>}
+                  {errors.confirm_password && (
+                    <span className="auth-error">
+                      {errors.confirm_password}
+                    </span>
+                  )}
                 </div>
 
                 {/* Terms */}
@@ -249,7 +285,7 @@ const Signup = () => {
                   <label>
                     <input type="checkbox" defaultChecked />
                     <span>
-                      I agree to the <a href="#">Terms of Service</a> and{' '}
+                      I agree to the <a href="#">Terms of Service</a> and{" "}
                       <a href="#">Privacy Policy</a>
                     </span>
                   </label>
@@ -265,10 +301,13 @@ const Signup = () => {
                 >
                   {loading ? (
                     <span className="btn-loading">
-                      <span className="spinner-small"></span> Creating Account...
+                      <span className="spinner-small"></span> Creating
+                      Account...
                     </span>
                   ) : (
-                    <>Create Account <FiArrowRight /></>
+                    <>
+                      Create Account <FiArrowRight />
+                    </>
                   )}
                 </motion.button>
               </form>
@@ -281,7 +320,7 @@ const Signup = () => {
               {/* Login Link */}
               <div className="auth-footer">
                 <p>
-                  Already have an account?{' '}
+                  Already have an account?{" "}
                   <Link to="/login" state={{ from }}>
                     Login
                   </Link>

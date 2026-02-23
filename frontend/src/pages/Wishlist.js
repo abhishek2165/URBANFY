@@ -1,17 +1,16 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Container, Row, Col } from 'react-bootstrap';
-import { motion, AnimatePresence } from 'framer-motion';
-import {
-  FiHeart, FiShoppingBag, FiTrash2, FiStar, FiArrowLeft
-} from 'react-icons/fi';
-import { useWishlist } from '../context/WishlistContext';
-import { useCart } from '../context/CartContext';
-import { toast } from 'react-toastify';
-import './Wishlist.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiShoppingBag, FiTrash2, FiStar, FiArrowLeft } from "react-icons/fi";
+import { useWishlist } from "../context/WishlistContext";
+import { useCart } from "../context/CartContext";
+import { toast } from "react-toastify";
+import "./Wishlist.css";
 
 const Wishlist = () => {
-  const { wishlistItems, removeFromWishlist, clearWishlist, wishlistCount } = useWishlist();
+  const { wishlistItems, removeFromWishlist, clearWishlist, wishlistCount } =
+    useWishlist();
   const { addToCart } = useCart();
 
   const handleMoveToCart = (product) => {
@@ -30,7 +29,7 @@ const Wishlist = () => {
       addToCart(item, 1);
     });
     clearWishlist();
-    toast.success('All items moved to cart!');
+    toast.success("All items moved to cart!");
   };
 
   // Empty Wishlist
@@ -78,7 +77,9 @@ const Wishlist = () => {
             animate={{ opacity: 1, y: 0 }}
           >
             <h1>My Wishlist</h1>
-            <p>{wishlistCount} {wishlistCount === 1 ? 'item' : 'items'} saved</p>
+            <p>
+              {wishlistCount} {wishlistCount === 1 ? "item" : "items"} saved
+            </p>
             <div className="breadcrumb-custom">
               <Link to="/">Home</Link>
               <span>/</span>
@@ -133,12 +134,21 @@ const Wishlist = () => {
                     <Link to={`/product/${product.id}`}>
                       <div className="wishlist-image">
                         <img
-                          src={product.image_url || 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=400&fit=crop'}
+                          src={
+                            product.image_url ||
+                            "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=400&fit=crop"
+                          }
                           alt={product.name}
                         />
                         {product.discount_price && (
                           <span className="wishlist-badge">
-                            -{Math.round(((product.price - product.discount_price) / product.price) * 100)}%
+                            -
+                            {Math.round(
+                              ((product.price - product.discount_price) /
+                                product.price) *
+                                100,
+                            )}
+                            %
                           </span>
                         )}
                       </div>
@@ -146,7 +156,9 @@ const Wishlist = () => {
 
                     {/* Info */}
                     <div className="wishlist-info">
-                      <span className="wishlist-brand">{product.brand || 'URBUNFY'}</span>
+                      <span className="wishlist-brand">
+                        {product.brand || "URBUNFY"}
+                      </span>
                       <Link to={`/product/${product.id}`}>
                         <h4 className="wishlist-name">{product.name}</h4>
                       </Link>
@@ -156,8 +168,16 @@ const Wishlist = () => {
                           <FiStar
                             key={star}
                             size={12}
-                            fill={star <= Math.round(product.rating || 0) ? '#ffc107' : 'none'}
-                            color={star <= Math.round(product.rating || 0) ? '#ffc107' : '#ddd'}
+                            fill={
+                              star <= Math.round(product.rating || 0)
+                                ? "#ffc107"
+                                : "none"
+                            }
+                            color={
+                              star <= Math.round(product.rating || 0)
+                                ? "#ffc107"
+                                : "#ddd"
+                            }
                           />
                         ))}
                       </div>
@@ -167,7 +187,9 @@ const Wishlist = () => {
                           ₹{product.discount_price || product.price}
                         </span>
                         {product.discount_price && (
-                          <span className="wishlist-original-price">₹{product.price}</span>
+                          <span className="wishlist-original-price">
+                            ₹{product.price}
+                          </span>
                         )}
                       </div>
 

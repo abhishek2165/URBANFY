@@ -1,18 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { Container, Row, Col } from 'react-bootstrap';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
+import { motion, AnimatePresence } from "framer-motion";
 import {
-  FiShoppingBag, FiHeart, FiMinus, FiPlus, FiStar,
-  FiTruck, FiShield, FiRefreshCw, FiCheck, FiChevronRight,
-  FiUser, FiArrowRight
-} from 'react-icons/fi';
-import { useCart } from '../context/CartContext';
-import { useAuth } from '../context/AuthContext';
-import { toast } from 'react-toastify';
-import api from '../services/api';
-import './ProductDetail.css';
-import { useWishlist } from '../context/WishlistContext';
+  FiShoppingBag,
+  FiHeart,
+  FiMinus,
+  FiPlus,
+  FiStar,
+  FiTruck,
+  FiShield,
+  FiRefreshCw,
+  FiCheck,
+  FiChevronRight,
+  FiUser,
+} from "react-icons/fi";
+import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
+import { toast } from "react-toastify";
+import api from "../services/api";
+import "./ProductDetail.css";
+import { useWishlist } from "../context/WishlistContext";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -24,17 +32,17 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
-  const wishlisted = product ? isInWishlist(product.id) : false;
+
   const [similarProducts, setSimilarProducts] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [avgRating, setAvgRating] = useState(0);
   const [totalReviews, setTotalReviews] = useState(0);
-  const [activeTab, setActiveTab] = useState('description');
+  const [activeTab, setActiveTab] = useState("description");
 
   // Review form
   const [reviewRating, setReviewRating] = useState(5);
-  const [reviewTitle, setReviewTitle] = useState('');
-  const [reviewComment, setReviewComment] = useState('');
+  const [reviewTitle, setReviewTitle] = useState("");
+  const [reviewComment, setReviewComment] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
@@ -50,8 +58,8 @@ const ProductDetail = () => {
       setProduct(res.data);
       fetchSimilar(res.data.id);
     } catch (error) {
-      toast.error('Product not found');
-      navigate('/');
+      toast.error("Product not found");
+      navigate("/");
     } finally {
       setLoading(false);
     }
@@ -62,7 +70,7 @@ const ProductDetail = () => {
       const res = await api.get(`/products/${productId}/similar?limit=4`);
       setSimilarProducts(res.data);
     } catch (error) {
-      console.log('No similar products');
+      console.log("No similar products");
     }
   };
 
@@ -73,14 +81,14 @@ const ProductDetail = () => {
       setAvgRating(res.data.average_rating);
       setTotalReviews(res.data.total_reviews);
     } catch (error) {
-      console.log('No reviews yet');
+      console.log("No reviews yet");
     }
   };
 
   const handleAddToCart = () => {
     if (!product) return;
     if (product.stock <= 0) {
-      toast.error('Product is out of stock');
+      toast.error("Product is out of stock");
       return;
     }
     addToCart(product, quantity);
@@ -91,16 +99,16 @@ const ProductDetail = () => {
     if (!product) return;
     addToCart(product, quantity);
     if (!isAuthenticated) {
-      navigate('/login');
+      navigate("/login");
     } else {
-      navigate('/checkout');
+      navigate("/checkout");
     }
   };
 
   const handleQuantityChange = (type) => {
-    if (type === 'increase' && quantity < (product?.stock || 10)) {
+    if (type === "increase" && quantity < (product?.stock || 10)) {
       setQuantity(quantity + 1);
-    } else if (type === 'decrease' && quantity > 1) {
+    } else if (type === "decrease" && quantity > 1) {
       setQuantity(quantity - 1);
     }
   };
@@ -109,26 +117,26 @@ const ProductDetail = () => {
     e.preventDefault();
 
     if (!isAuthenticated) {
-      toast.info('Please login to write a review');
-      navigate('/login');
+      toast.info("Please login to write a review");
+      navigate("/login");
       return;
     }
 
     setSubmitting(true);
     try {
-      await api.post('/reviews/', {
+      await api.post("/reviews/", {
         product_id: parseInt(id),
         rating: reviewRating,
         title: reviewTitle,
-        comment: reviewComment
+        comment: reviewComment,
       });
-      toast.success('Review submitted successfully!');
-      setReviewTitle('');
-      setReviewComment('');
+      toast.success("Review submitted successfully!");
+      setReviewTitle("");
+      setReviewComment("");
       setReviewRating(5);
       fetchReviews();
     } catch (error) {
-      toast.error(error.response?.data?.detail || 'Failed to submit review');
+      toast.error(error.response?.data?.detail || "Failed to submit review");
     } finally {
       setSubmitting(false);
     }
@@ -136,12 +144,14 @@ const ProductDetail = () => {
 
   const getDiscountPercent = () => {
     if (!product?.discount_price) return 0;
-    return Math.round(((product.price - product.discount_price) / product.price) * 100);
+    return Math.round(
+      ((product.price - product.discount_price) / product.price) * 100,
+    );
   };
 
   if (loading) {
     return (
-      <div className="loading-wrapper" style={{ minHeight: '60vh' }}>
+      <div className="loading-wrapper" style={{ minHeight: "60vh" }}>
         <div className="loading-spinner"></div>
         <p className="loading-text">Loading product...</p>
       </div>
@@ -150,9 +160,11 @@ const ProductDetail = () => {
 
   if (!product) {
     return (
-      <div className="empty-state" style={{ minHeight: '60vh' }}>
+      <div className="empty-state" style={{ minHeight: "60vh" }}>
         <h3>Product Not Found</h3>
-        <Link to="/" className="btn-primary-custom">Go Home</Link>
+        <Link to="/" className="btn-primary-custom">
+          Go Home
+        </Link>
       </div>
     );
   }
@@ -167,8 +179,8 @@ const ProductDetail = () => {
           <div className="breadcrumb-links">
             <Link to="/">Home</Link>
             <FiChevronRight />
-            <Link to={`/${product.category_name?.toLowerCase() || 'perfumes'}`}>
-              {product.category_name || 'Products'}
+            <Link to={`/${product.category_name?.toLowerCase() || "perfumes"}`}>
+              {product.category_name || "Products"}
             </Link>
             <FiChevronRight />
             <span>{product.name}</span>
@@ -190,30 +202,41 @@ const ProductDetail = () => {
               >
                 <div className="main-image-wrapper">
                   {product.discount_price && (
-                    <span className="detail-badge">-{getDiscountPercent()}% OFF</span>
+                    <span className="detail-badge">
+                      -{getDiscountPercent()}% OFF
+                    </span>
                   )}
                   <motion.button
-  whileHover={{ scale: 1.1 }}
-  whileTap={{ scale: 0.9 }}
-  onClick={(e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const added = toggleWishlist(product);
-    if (added) {
-      toast.success(`${product.name} added to wishlist!`, { icon: '💝' });
-    } else {
-      toast.info(`${product.name} removed from wishlist`);
-    }
-  }}
-  style={{
-    color: isInWishlist(product.id) ? '#e94560' : 'inherit',
-    background: isInWishlist(product.id) ? '#fff0f3' : 'white'
-  }}
->
-  <FiHeart fill={isInWishlist(product.id) ? '#e94560' : 'none'} />
-</motion.button>
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      const added = toggleWishlist(product);
+                      if (added) {
+                        toast.success(`${product.name} added to wishlist!`, {
+                          icon: "💝",
+                        });
+                      } else {
+                        toast.info(`${product.name} removed from wishlist`);
+                      }
+                    }}
+                    style={{
+                      color: isInWishlist(product.id) ? "#e94560" : "inherit",
+                      background: isInWishlist(product.id)
+                        ? "#fff0f3"
+                        : "white",
+                    }}
+                  >
+                    <FiHeart
+                      fill={isInWishlist(product.id) ? "#e94560" : "none"}
+                    />
+                  </motion.button>
                   <img
-                    src={product.image_url || 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&h=600&fit=crop'}
+                    src={
+                      product.image_url ||
+                      "https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&h=600&fit=crop"
+                    }
                     alt={product.name}
                     className="main-product-image"
                   />
@@ -230,7 +253,9 @@ const ProductDetail = () => {
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
                 {/* Brand */}
-                <span className="detail-brand">{product.brand || 'URBUNFY'}</span>
+                <span className="detail-brand">
+                  {product.brand || "URBUNFY"}
+                </span>
 
                 {/* Name */}
                 <h1 className="detail-name">{product.name}</h1>
@@ -242,13 +267,22 @@ const ProductDetail = () => {
                       <FiStar
                         key={star}
                         className="detail-star"
-                        fill={star <= Math.round(avgRating || product.rating || 0) ? '#ffc107' : 'none'}
-                        color={star <= Math.round(avgRating || product.rating || 0) ? '#ffc107' : '#ddd'}
+                        fill={
+                          star <= Math.round(avgRating || product.rating || 0)
+                            ? "#ffc107"
+                            : "none"
+                        }
+                        color={
+                          star <= Math.round(avgRating || product.rating || 0)
+                            ? "#ffc107"
+                            : "#ddd"
+                        }
                       />
                     ))}
                   </div>
                   <span className="detail-rating-text">
-                    {(avgRating || product.rating || 0).toFixed(1)} ({totalReviews || product.total_reviews || 0} reviews)
+                    {(avgRating || product.rating || 0).toFixed(1)} (
+                    {totalReviews || product.total_reviews || 0} reviews)
                   </span>
                 </div>
 
@@ -257,7 +291,9 @@ const ProductDetail = () => {
                   <span className="detail-current-price">₹{currentPrice}</span>
                   {product.discount_price && (
                     <>
-                      <span className="detail-original-price">₹{product.price}</span>
+                      <span className="detail-original-price">
+                        ₹{product.price}
+                      </span>
                       <span className="detail-discount-tag">
                         {getDiscountPercent()}% OFF
                       </span>
@@ -269,7 +305,8 @@ const ProductDetail = () => {
 
                 {/* Short Description */}
                 <p className="detail-short-desc">
-                  {product.short_description || product.description?.substring(0, 150)}
+                  {product.short_description ||
+                    product.description?.substring(0, 150)}
                 </p>
 
                 {/* Product Meta */}
@@ -284,18 +321,25 @@ const ProductDetail = () => {
                     <div className="meta-item">
                       <span className="meta-label">Gender</span>
                       <span className="meta-value">
-                        {product.gender.charAt(0).toUpperCase() + product.gender.slice(1)}
+                        {product.gender.charAt(0).toUpperCase() +
+                          product.gender.slice(1)}
                       </span>
                     </div>
                   )}
                   <div className="meta-item">
                     <span className="meta-label">Category</span>
-                    <span className="meta-value">{product.category_name || 'Perfume'}</span>
+                    <span className="meta-value">
+                      {product.category_name || "Perfume"}
+                    </span>
                   </div>
                   <div className="meta-item">
                     <span className="meta-label">Availability</span>
-                    <span className={`meta-value ${product.stock > 0 ? 'in-stock' : 'out-stock'}`}>
-                      {product.stock > 0 ? `In Stock (${product.stock} left)` : 'Out of Stock'}
+                    <span
+                      className={`meta-value ${product.stock > 0 ? "in-stock" : "out-stock"}`}
+                    >
+                      {product.stock > 0
+                        ? `In Stock (${product.stock} left)`
+                        : "Out of Stock"}
                     </span>
                   </div>
                 </div>
@@ -306,7 +350,7 @@ const ProductDetail = () => {
                     <div className="quantity-selector">
                       <button
                         className="qty-btn"
-                        onClick={() => handleQuantityChange('decrease')}
+                        onClick={() => handleQuantityChange("decrease")}
                         disabled={quantity <= 1}
                       >
                         <FiMinus />
@@ -314,7 +358,7 @@ const ProductDetail = () => {
                       <span className="qty-value">{quantity}</span>
                       <button
                         className="qty-btn"
-                        onClick={() => handleQuantityChange('increase')}
+                        onClick={() => handleQuantityChange("increase")}
                         disabled={quantity >= product.stock}
                       >
                         <FiPlus />
@@ -376,14 +420,14 @@ const ProductDetail = () => {
         <Container>
           <div className="tabs-header">
             <button
-              className={`tab-btn ${activeTab === 'description' ? 'active' : ''}`}
-              onClick={() => setActiveTab('description')}
+              className={`tab-btn ${activeTab === "description" ? "active" : ""}`}
+              onClick={() => setActiveTab("description")}
             >
               Description
             </button>
             <button
-              className={`tab-btn ${activeTab === 'reviews' ? 'active' : ''}`}
-              onClick={() => setActiveTab('reviews')}
+              className={`tab-btn ${activeTab === "reviews" ? "active" : ""}`}
+              onClick={() => setActiveTab("reviews")}
             >
               Reviews ({totalReviews || 0})
             </button>
@@ -391,7 +435,7 @@ const ProductDetail = () => {
 
           <div className="tabs-content">
             <AnimatePresence mode="wait">
-              {activeTab === 'description' && (
+              {activeTab === "description" && (
                 <motion.div
                   key="description"
                   initial={{ opacity: 0, y: 15 }}
@@ -401,12 +445,12 @@ const ProductDetail = () => {
                   className="tab-pane"
                 >
                   <div className="description-content">
-                    <p>{product.description || 'No description available.'}</p>
+                    <p>{product.description || "No description available."}</p>
                   </div>
                 </motion.div>
               )}
 
-              {activeTab === 'reviews' && (
+              {activeTab === "reviews" && (
                 <motion.div
                   key="reviews"
                   initial={{ opacity: 0, y: 15 }}
@@ -426,17 +470,29 @@ const ProductDetail = () => {
                         {/* Rating Summary */}
                         <div className="rating-summary">
                           <div className="rating-big">
-                            <span className="rating-number">{avgRating.toFixed(1)}</span>
+                            <span className="rating-number">
+                              {avgRating.toFixed(1)}
+                            </span>
                             <div className="rating-big-stars">
                               {[1, 2, 3, 4, 5].map((star) => (
                                 <FiStar
                                   key={star}
-                                  fill={star <= Math.round(avgRating) ? '#ffc107' : 'none'}
-                                  color={star <= Math.round(avgRating) ? '#ffc107' : '#ddd'}
+                                  fill={
+                                    star <= Math.round(avgRating)
+                                      ? "#ffc107"
+                                      : "none"
+                                  }
+                                  color={
+                                    star <= Math.round(avgRating)
+                                      ? "#ffc107"
+                                      : "#ddd"
+                                  }
                                 />
                               ))}
                             </div>
-                            <span className="rating-total">{totalReviews} reviews</span>
+                            <span className="rating-total">
+                              {totalReviews} reviews
+                            </span>
                           </div>
                         </div>
 
@@ -453,29 +509,43 @@ const ProductDetail = () => {
                                     <FiUser />
                                   </div>
                                   <div>
-                                    <h6 className="review-user-name">{review.user_name}</h6>
+                                    <h6 className="review-user-name">
+                                      {review.user_name}
+                                    </h6>
                                     <div className="review-stars-small">
                                       {[1, 2, 3, 4, 5].map((star) => (
                                         <FiStar
                                           key={star}
                                           size={12}
-                                          fill={star <= review.rating ? '#ffc107' : 'none'}
-                                          color={star <= review.rating ? '#ffc107' : '#ddd'}
+                                          fill={
+                                            star <= review.rating
+                                              ? "#ffc107"
+                                              : "none"
+                                          }
+                                          color={
+                                            star <= review.rating
+                                              ? "#ffc107"
+                                              : "#ddd"
+                                          }
                                         />
                                       ))}
                                     </div>
                                   </div>
                                 </div>
                                 <span className="review-date">
-                                  {new Date(review.created_at).toLocaleDateString('en-IN', {
-                                    year: 'numeric',
-                                    month: 'short',
-                                    day: 'numeric'
+                                  {new Date(
+                                    review.created_at,
+                                  ).toLocaleDateString("en-IN", {
+                                    year: "numeric",
+                                    month: "short",
+                                    day: "numeric",
                                   })}
                                 </span>
                               </div>
                               {review.title && (
-                                <h6 className="review-title-text">{review.title}</h6>
+                                <h6 className="review-title-text">
+                                  {review.title}
+                                </h6>
                               )}
                               <p className="review-comment">{review.comment}</p>
                             </div>
@@ -497,7 +567,10 @@ const ProductDetail = () => {
                             </Link>
                           </div>
                         ) : (
-                          <form onSubmit={handleReviewSubmit} className="review-form">
+                          <form
+                            onSubmit={handleReviewSubmit}
+                            className="review-form"
+                          >
                             {/* Rating */}
                             <div className="form-group-review">
                               <label>Your Rating</label>
@@ -511,8 +584,16 @@ const ProductDetail = () => {
                                   >
                                     <FiStar
                                       size={24}
-                                      fill={star <= reviewRating ? '#ffc107' : 'none'}
-                                      color={star <= reviewRating ? '#ffc107' : '#ddd'}
+                                      fill={
+                                        star <= reviewRating
+                                          ? "#ffc107"
+                                          : "none"
+                                      }
+                                      color={
+                                        star <= reviewRating
+                                          ? "#ffc107"
+                                          : "#ddd"
+                                      }
                                     />
                                   </button>
                                 ))}
@@ -536,7 +617,9 @@ const ProductDetail = () => {
                               <label>Your Review</label>
                               <textarea
                                 value={reviewComment}
-                                onChange={(e) => setReviewComment(e.target.value)}
+                                onChange={(e) =>
+                                  setReviewComment(e.target.value)
+                                }
                                 placeholder="Write your review here..."
                                 className="review-textarea"
                                 rows={4}
@@ -550,7 +633,7 @@ const ProductDetail = () => {
                               whileHover={{ scale: 1.02 }}
                               whileTap={{ scale: 0.98 }}
                             >
-                              {submitting ? 'Submitting...' : 'Submit Review'}
+                              {submitting ? "Submitting..." : "Submit Review"}
                             </motion.button>
                           </form>
                         )}
@@ -604,8 +687,6 @@ const ProductDetail = () => {
 // SIMILAR PRODUCT CARD
 // ============================================
 const SimilarProductCard = ({ product }) => {
-  const { addToCart } = useCart();
-
   const handleAdd = () => {
     addToCart(product, 1);
     toast.success(`${product.name} added to cart!`);
@@ -616,23 +697,33 @@ const SimilarProductCard = ({ product }) => {
       <Link to={`/product/${product.id}`}>
         <div className="product-image-wrapper">
           <img
-            src={product.image_url || 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=400&fit=crop'}
+            src={
+              product.image_url ||
+              "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=400&fit=crop"
+            }
             alt={product.name}
           />
           {product.discount_price && (
             <span className="product-badge">
-              -{Math.round(((product.price - product.discount_price) / product.price) * 100)}%
+              -
+              {Math.round(
+                ((product.price - product.discount_price) / product.price) *
+                  100,
+              )}
+              %
             </span>
           )}
         </div>
       </Link>
       <div className="product-info">
-        <span className="product-brand">{product.brand || 'URBUNFY'}</span>
+        <span className="product-brand">{product.brand || "URBUNFY"}</span>
         <Link to={`/product/${product.id}`}>
           <h4 className="product-name">{product.name}</h4>
         </Link>
         <div className="product-price-wrapper">
-          <span className="product-price">₹{product.discount_price || product.price}</span>
+          <span className="product-price">
+            ₹{product.discount_price || product.price}
+          </span>
           {product.discount_price && (
             <span className="product-original-price">₹{product.price}</span>
           )}

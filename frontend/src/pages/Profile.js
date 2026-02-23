@@ -14,7 +14,6 @@ import {
   FiMapPin,
   FiCalendar,
   FiChevronRight,
-  FiEye,
   FiLock,
   FiShoppingBag,
   FiTruck,
