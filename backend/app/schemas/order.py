@@ -29,10 +29,10 @@ class OrderItemResponse(BaseModel):
     price: float
     quantity: int
     total: float
-
+    friend_name: Optional[str] = None    # ⬅️ NEW 
     class Config:
         from_attributes = True
-    friend_name: Optional[str] = None    # ⬅️ NEW  
+     
 
 
 # ============================================
