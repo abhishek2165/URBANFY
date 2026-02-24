@@ -1114,7 +1114,7 @@ const Orders = () => {
                           fontFamily: "'Playfair Display', serif",
                         }}
                       >
-                        URBUNFY
+                        URBANFY
                       </h1>
                       <p
                         style={{
@@ -1610,7 +1610,7 @@ const Orders = () => {
                         margin: "0 0 5px",
                       }}
                     >
-                      URBUNFY
+                      URBANFY
                     </p>
                     <p
                       style={{
