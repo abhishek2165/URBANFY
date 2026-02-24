@@ -852,3 +852,151 @@
   color: #2e7d32;
   border: 1px solid #c8e6c9;
 }
+/* ============================================
+   GIFT SURPRISE MODAL
+   ============================================ */
+.gift-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.gift-modal {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 35px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.gift-modal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #c9a96e, #f5d061, #c9a96e);
+}
+
+.gift-modal-icon {
+  margin-bottom: 15px;
+}
+
+.gift-modal-title {
+  font-family: var(--font-heading, "Playfair Display", serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0 0 8px;
+}
+
+.gift-modal-subtitle {
+  font-size: 0.95rem;
+  color: #8a8a9a;
+  margin: 0 0 25px;
+}
+
+.gift-input-wrapper {
+  text-align: left;
+  margin-bottom: 25px;
+}
+
+.gift-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+}
+
+.gift-input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 1rem;
+  color: #1a1a2e;
+  transition: all 0.3s ease;
+  outline: none;
+  background: #f8f9fa;
+}
+
+.gift-input:focus {
+  border-color: #c9a96e;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(201, 169, 110, 0.1);
+}
+
+.gift-input::placeholder {
+  color: #bbb;
+}
+
+.gift-input-error {
+  border-color: #e94560 !important;
+}
+
+.gift-input-error:focus {
+  box-shadow: 0 0 0 4px rgba(233, 69, 96, 0.1) !important;
+}
+
+.gift-error {
+  display: block;
+  font-size: 0.78rem;
+  color: #e94560;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.gift-confirm-btn {
+  width: 100%;
+  padding: 15px 24px;
+  background: linear-gradient(135deg, #1a1a2e, #2d2d44);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.gift-confirm-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #c9a96e, #b8952e);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(201, 169, 110, 0.3);
+}
+
+.gift-confirm-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .gift-modal {
+    padding: 30px 20px;
+    margin: 10px;
+  }
+
+  .gift-modal-title {
+    font-size: 1.3rem;
+  }
+}

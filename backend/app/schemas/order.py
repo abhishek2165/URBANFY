@@ -15,6 +15,7 @@ class OrderCreate(BaseModel):
     payment_method: str = "COD"
     notes: Optional[str] = None
     coupon_code: Optional[str] = None
+    friend_name: Optional[str] = None 
 
 
 # ============================================
@@ -31,6 +32,7 @@ class OrderItemResponse(BaseModel):
 
     class Config:
         from_attributes = True
+    friend_name: Optional[str] = None    # ⬅️ NEW  
 
 
 # ============================================

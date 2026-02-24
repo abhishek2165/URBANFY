@@ -654,6 +654,53 @@ const Orders = () => {
                         />
                         <span style={{ fontSize: "0.85rem" }}>
                           {selectedOrder.phone}
+
+                          {/* ⬅️ NEW: Friend Name */}
+                          {selectedOrder.friend_name && (
+                            <div
+                              style={{
+                                marginTop: "10px",
+                                padding: "10px 12px",
+                                background:
+                                  "linear-gradient(135deg, #fce4ec, #f8bbd0)",
+                                borderRadius: "8px",
+                                border: "1px solid #f48fb1",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: "8px",
+                                }}
+                              >
+                                <span style={{ fontSize: "1.2rem" }}>🎁</span>
+                                <div>
+                                  <span
+                                    style={{
+                                      fontSize: "0.72rem",
+                                      color: "#ad1457",
+                                      textTransform: "uppercase",
+                                      letterSpacing: "1px",
+                                      fontWeight: 600,
+                                    }}
+                                  >
+                                    Surprise Gift For
+                                  </span>
+                                  <p
+                                    style={{
+                                      fontSize: "0.95rem",
+                                      fontWeight: 700,
+                                      color: "#880e4f",
+                                      margin: "2px 0 0",
+                                    }}
+                                  >
+                                    {selectedOrder.friend_name}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          )}
                         </span>
                       </div>
                     </div>
@@ -1238,6 +1285,42 @@ const Orders = () => {
                             ? `- ${selectedOrder.pincode}`
                             : ""}
                         </p>
+                      )}
+
+                      {/* ⬅️ NEW: Friend Name in Invoice */}
+                      {selectedOrder.friend_name && (
+                        <div
+                          style={{
+                            marginTop: "8px",
+                            padding: "8px 10px",
+                            background: "#fce4ec",
+                            borderRadius: "4px",
+                            border: "1px solid #f48fb1",
+                          }}
+                        >
+                          <p
+                            style={{
+                              fontSize: "10px",
+                              color: "#ad1457",
+                              textTransform: "uppercase",
+                              letterSpacing: "1px",
+                              margin: "0 0 2px",
+                              fontWeight: 600,
+                            }}
+                          >
+                            🎁 Surprise Gift For
+                          </p>
+                          <p
+                            style={{
+                              fontSize: "13px",
+                              fontWeight: 700,
+                              color: "#880e4f",
+                              margin: 0,
+                            }}
+                          >
+                            {selectedOrder.friend_name}
+                          </p>
+                        </div>
                       )}
                     </div>
 

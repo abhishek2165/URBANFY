@@ -32,6 +32,7 @@ class Order(Base):
     razorpay_payment_id = Column(String(100), nullable=True)
     razorpay_signature = Column(String(255), nullable=True)
     coupon_code = Column(String(50), nullable=True)
+    friend_name = Column(String(200), nullable=True)
 
     # ⬅️ NEW: Expected Delivery Date
     expected_delivery = Column(Date, nullable=True)
