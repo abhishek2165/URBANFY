@@ -52,11 +52,6 @@ const Checkout = () => {
   const [availableCoupons, setAvailableCoupons] = useState([]);
   const [showCoupons, setShowCoupons] = useState(false);
 
-  // ===== GIFT SURPRISE STATES =====
-  const [showGiftModal, setShowGiftModal] = useState(false);
-  const [friendName, setFriendName] = useState("");
-  const [friendNameError, setFriendNameError] = useState("");
-
   // ===== CALCULATIONS =====
   const subtotal = cartTotal;
   const shipping = subtotal >= 999 ? 0 : 49;
@@ -219,7 +214,6 @@ const Checkout = () => {
         payment_method: "Online",
         notes: formData.notes,
         coupon_code: appliedCoupon ? appliedCoupon.coupon_code : null,
-        friend_name: friendName.trim(), // ⬅️ NEW
       });
 
       const data = response.data;
@@ -307,7 +301,6 @@ const Checkout = () => {
         payment_method: "COD",
         notes: formData.notes,
         coupon_code: appliedCoupon ? appliedCoupon.coupon_code : null,
-        friend_name: friendName.trim(), // ⬅️ NEW
       });
 
       setOrderData(response.data);
@@ -328,18 +321,7 @@ const Checkout = () => {
       toast.error("Please fill all required fields");
       return;
     }
-    // Show gift popup first
-    setShowGiftModal(true);
-  };
 
-  // ⬅️ NEW: After gift name is entered
-  const handleGiftConfirmAndPlaceOrder = async () => {
-    if (!friendName.trim()) {
-      setFriendNameError("Please enter your friend's name");
-      return;
-    }
-    setFriendNameError("");
-    setShowGiftModal(false);
     setLoading(true);
 
     try {
@@ -420,41 +402,6 @@ const Checkout = () => {
             >
               📱 Order confirmation SMS sent to your phone number!
             </motion.div>
-
-            {/* ⬅️ NEW: Gift Friend Info */}
-            {orderData.friend_name && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.45 }}
-                style={{
-                  background: "linear-gradient(135deg, #fce4ec, #f8bbd0)",
-                  padding: "15px 20px",
-                  borderRadius: "12px",
-                  marginBottom: "20px",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "12px",
-                  fontSize: "0.95rem",
-                  color: "#880e4f",
-                  border: "1px solid #f48fb1",
-                }}
-              >
-                <span style={{ fontSize: "1.5rem" }}>🎁</span>
-                <div>
-                  <strong>Surprise Gift for: {orderData.friend_name}</strong>
-                  <p
-                    style={{
-                      margin: "2px 0 0",
-                      fontSize: "0.8rem",
-                      color: "#ad1457",
-                    }}
-                  >
-                    Your friend will love this surprise! 💝
-                  </p>
-                </div>
-              </motion.div>
-            )}
 
             <motion.div
               className="success-details"
@@ -1015,84 +962,5 @@ const Checkout = () => {
     </div>
   );
 };
-
-{
-  /* ============================================ */
-}
-{
-  /* ⬅️ NEW: GIFT SURPRISE MODAL */
-}
-{
-  /* ============================================ */
-}
-{
-  showGiftModal && (
-    <div className="gift-modal-overlay">
-      <motion.div
-        className="gift-modal"
-        initial={{ opacity: 0, scale: 0.8, y: 20 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ type: "spring", stiffness: 300, damping: 25 }}
-      >
-        {/* Gift Icon */}
-        <div className="gift-modal-icon">
-          <motion.span
-            animate={{ rotate: [0, -10, 10, -10, 0] }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            style={{ fontSize: "3rem", display: "block" }}
-          >
-            🎁
-          </motion.span>
-        </div>
-
-        {/* Title */}
-        <h3 className="gift-modal-title">You Got a Surprise!</h3>
-        <p className="gift-modal-subtitle">Add Your Best Friend's Name</p>
-
-        {/* Friend Name Input */}
-        <div className="gift-input-wrapper">
-          <label className="gift-label">Friend's Name *</label>
-          <input
-            type="text"
-            value={friendName}
-            onChange={(e) => {
-              setFriendName(e.target.value);
-              setFriendNameError("");
-            }}
-            placeholder="Enter your friend's name"
-            className={`gift-input ${friendNameError ? "gift-input-error" : ""}`}
-            autoFocus
-            maxLength={100}
-          />
-          {friendNameError && (
-            <span className="gift-error">{friendNameError}</span>
-          )}
-        </div>
-
-        {/* Buttons */}
-        <motion.button
-          className="gift-confirm-btn"
-          onClick={handleGiftConfirmAndPlaceOrder}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          disabled={loading}
-        >
-          {loading ? (
-            <span>Processing...</span>
-          ) : (
-            <>
-              <span>✨</span>
-              <span>
-                {formData.payment_method === "Online"
-                  ? `Continue & Pay ₹${total.toFixed(2)}`
-                  : `Continue & Place Order`}
-              </span>
-            </>
-          )}
-        </motion.button>
-      </motion.div>
-    </div>
-  );
-}
 
 export default Checkout;

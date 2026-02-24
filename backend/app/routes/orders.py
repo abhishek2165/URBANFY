@@ -136,7 +136,6 @@ def build_order_response(order):
             price=float(item.price),
             quantity=item.quantity,
             total=float(item.total)
-               
         ))
 
     return OrderResponse(
@@ -163,7 +162,6 @@ def build_order_response(order):
         # Razorpay
         razorpay_order_id=order.razorpay_order_id,
         razorpay_payment_id=order.razorpay_payment_id,
-        friend_name=order.friend_name,
     )
 
 
@@ -293,7 +291,6 @@ async def place_order(
             notes=order_data.notes,
             coupon_code=coupon_code if coupon else None,
             expected_delivery=expected_delivery,  # ⬅️ NEW
-            friend_name=order_data.friend_name,  # ⬅️ NEW
         )
 
         db.add(new_order)
