@@ -40,7 +40,7 @@ const Checkout = () => {
     city: "",
     state: "",
     pincode: "",
-    payment_method: "COD",
+    payment_method: "Online",
     notes: "",
   });
 
