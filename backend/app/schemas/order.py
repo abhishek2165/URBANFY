@@ -15,6 +15,7 @@ class OrderCreate(BaseModel):
     payment_method: str = "COD"
     notes: Optional[str] = None
     coupon_code: Optional[str] = None
+    friend_name: Optional[str] = None
 
 
 # ============================================
@@ -62,6 +63,7 @@ class OrderResponse(BaseModel):
     # ===== नवीन RAZORPAY FIELDS =====
     razorpay_order_id: Optional[str] = None
     razorpay_payment_id: Optional[str] = None
+    friend_name: Optional[str] = None
     # =================================
 
     class Config:
