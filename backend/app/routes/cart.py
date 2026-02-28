@@ -241,3 +241,61 @@ async def clear_cart(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to clear cart: {str(e)}"
         )
+
+        # backend/app/routes/cart.py
+# File च्या शेवटी हा route ADD कर
+
+# ============================================
+# SYNC CART (SET quantity, not ADD)
+# ============================================
+@router.post("/sync", response_model=dict)
+async def sync_cart_item(
+    cart_data: CartAdd,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Sync cart from frontend - SET quantity (not add)
+    Frontend cart = source of truth
+    """
+    try:
+        product = db.query(Product).filter(
+            Product.id == cart_data.product_id,
+            Product.is_active == True
+        ).first()
+
+        if not product:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Product not found"
+            )
+
+        # Check existing
+        existing = db.query(Cart).filter(
+            Cart.user_id == current_user.id,
+            Cart.product_id == cart_data.product_id
+        ).first()
+
+        if existing:
+            # ✅ SET quantity, NOT add!
+            existing.quantity = cart_data.quantity
+        else:
+            new_item = Cart(
+                user_id=current_user.id,
+                product_id=cart_data.product_id,
+                quantity=cart_data.quantity
+            )
+            db.add(new_item)
+
+        db.commit()
+
+        return {"success": True, "message": "Item synced"}
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Sync failed: {str(e)}"
+        )

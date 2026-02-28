@@ -186,18 +186,31 @@ const Checkout = () => {
   // ============================================
   // SYNC CART TO SERVER
   // ============================================
-  const syncCartToServer = async () => {
-    for (const item of cartItems) {
-      try {
-        await api.post("/cart/add", {
-          product_id: item.id,
-          quantity: item.quantity,
-        });
-      } catch (err) {
-        // ignore if already in cart
-      }
+  // frontend/src/pages/Checkout.js
+// जुना syncCartToServer DELETE कर आणि हा टाक
+
+const syncCartToServer = async () => {
+  // ✅ STEP 1: Server ची cart पूर्ण clear कर
+  try {
+    await api.delete("/cart/clear/all");
+    console.log("🗑️ Server cart cleared");
+  } catch (err) {
+    console.log("Clear failed, trying anyway...");
+  }
+
+  // ✅ STEP 2: Frontend cart items FRESH add कर
+  for (const item of cartItems) {
+    try {
+      await api.post("/cart/sync", {
+        product_id: item.id,
+        quantity: item.quantity,
+      });
+    } catch (err) {
+      console.log(`Failed to sync ${item.name}`);
     }
-  };
+  }
+  console.log("✅ Cart synced to server");
+};
 
   // ============================================
   // RAZORPAY PAYMENT HANDLER
