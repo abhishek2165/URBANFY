@@ -38,8 +38,8 @@ class Settings:
     FRONTEND_URL: str = os.getenv("FRONTEND_URL", "http://localhost:3000")
     ADMIN_URL: str = os.getenv("ADMIN_URL", "http://localhost:3001")
 
-    RAZORPAY_KEY_ID: str = os.getenv("RAZORPAY_KEY_ID", "rzp_test_SGIoNEn0S3lPvf")
-    RAZORPAY_KEY_SECRET: str = os.getenv("RAZORPAY_KEY_SECRET", "tkhdUWWQncqhattESunZavwQ")
+    RAZORPAY_KEY_ID: str = os.getenv("RAZORPAY_KEY_ID", "rzp_live_SLQ9tFPXXdzA4Y")
+    RAZORPAY_KEY_SECRET: str = os.getenv("RAZORPAY_KEY_SECRET", "Mc6HCjY5p5E4DGr9kdrLbfjO")
 
 
 settings = Settings()
