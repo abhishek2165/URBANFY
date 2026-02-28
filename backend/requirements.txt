@@ -16,3 +16,4 @@ razorpay
 requests
 httpx
 gunicorn
+cloudinary

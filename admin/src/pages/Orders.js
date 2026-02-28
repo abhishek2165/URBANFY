@@ -330,6 +330,7 @@ const Orders = () => {
                   <th>Payment</th>
                   <th>Status</th>
                   <th>Phone</th>
+                  <th>Gift For</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -337,7 +338,7 @@ const Orders = () => {
                 {filteredOrders.length === 0 ? (
                   <tr>
                     <td
-                      colSpan="8"
+                      colSpan="9"
                       style={{
                         textAlign: "center",
                         padding: "40px",
@@ -407,6 +408,29 @@ const Orders = () => {
                         </span>
                       </td>
                       <td style={{ fontSize: "0.85rem" }}>{order.phone}</td>
+                      <td>
+                        {order.friend_name ? (
+                          <span
+                            style={{
+                              background: "#fce4ec",
+                              color: "#880e4f",
+                              padding: "4px 10px",
+                              borderRadius: "12px",
+                              fontSize: "0.78rem",
+                              fontWeight: 600,
+                              display: "inline-flex",
+                              alignItems: "center",
+                              gap: "4px",
+                            }}
+                          >
+                            🎁 {order.friend_name}
+                          </span>
+                        ) : (
+                          <span style={{ color: "#ccc", fontSize: "0.8rem" }}>
+                            -
+                          </span>
+                        )}
+                      </td>
                       <td>
                         <div style={{ display: "flex", gap: "4px" }}>
                           <button
@@ -656,6 +680,51 @@ const Orders = () => {
                           {selectedOrder.phone}
                         </span>
                       </div>
+                      {selectedOrder.friend_name && (
+                        <div
+                          style={{
+                            marginTop: "12px",
+                            padding: "12px 14px",
+                            background:
+                              "linear-gradient(135deg, #fce4ec, #f8bbd0)",
+                            borderRadius: "10px",
+                            border: "1px solid #f48fb1",
+                          }}
+                        >
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "10px",
+                            }}
+                          >
+                            <span style={{ fontSize: "1.3rem" }}>🎁</span>
+                            <div>
+                              <span
+                                style={{
+                                  fontSize: "0.7rem",
+                                  color: "#ad1457",
+                                  textTransform: "uppercase",
+                                  letterSpacing: "1.5px",
+                                  fontWeight: 600,
+                                }}
+                              >
+                                Surprise Gift For
+                              </span>
+                              <p
+                                style={{
+                                  fontSize: "1rem",
+                                  fontWeight: 700,
+                                  color: "#880e4f",
+                                  margin: "3px 0 0",
+                                }}
+                              >
+                                {selectedOrder.friend_name}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </Col>
