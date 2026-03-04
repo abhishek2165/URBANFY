@@ -13,7 +13,7 @@ from app.routes.reviews import router as reviews_router
 from app.routes.admin import router as admin_router
 from app.routes.upload import router as upload_router
 from app.routes import payment
-from app.routes import coupon
+from app.routes import coupon,sale
 # from app.routes import test_sms   ⬅️ COMMENT OUT kar
 
 # Create FastAPI app
@@ -52,6 +52,7 @@ app.include_router(admin_router)
 app.include_router(upload_router)
 app.include_router(payment.router)
 app.include_router(coupon.router)
+app.include_router(sale.router)
 # app.include_router(test_sms.router)   ⬅️ COMMENT OUT kar
 
 

@@ -490,6 +490,120 @@ const BannerSection = () => {
     </section>
   );
 };
+// ============================================
+// sale SECTION
+// ============================================
+const SaleBanner = () => {
+  const [sales, setSales] = useState([]);
+
+  useEffect(() => {
+    fetchSales();
+  }, []);
+
+  const fetchSales = async () => {
+    try {
+      const res = await api.get('/sales/active');
+      setSales(res.data.sales || []);
+    } catch (error) {
+      console.log('No active sales');
+    }
+  };
+
+  const getTimeLeft = (endDate) => {
+    const diff = new Date(endDate) - new Date();
+    if (diff <= 0) return null;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    return { days, hours, minutes, seconds };
+  };
+
+  const [timeLeft, setTimeLeft] = useState({});
+
+  useEffect(() => {
+    if (sales.length === 0) return;
+    const timer = setInterval(() => {
+      const newTimeLeft = {};
+      sales.forEach(sale => {
+        newTimeLeft[sale.id] = getTimeLeft(sale.end_date);
+      });
+      setTimeLeft(newTimeLeft);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [sales]);
+
+  if (sales.length === 0) return null;
+
+  return (
+    <section className="sale-banner-section">
+      {sales.map((sale) => {
+        const time = timeLeft[sale.id];
+        if (!time) return null;
+
+        return (
+          <motion.div
+            key={sale.id}
+            className="sale-banner"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Container>
+              <div className="sale-banner-content">
+                {sale.banner_image && (
+                  <div className="sale-banner-image">
+                    <img src={sale.banner_image} alt={sale.name} />
+                  </div>
+                )}
+                <div className="sale-banner-info">
+                  <span className="sale-tag">🔥 LIMITED TIME OFFER</span>
+                  <h2 className="sale-name">{sale.name}</h2>
+                  <div className="sale-discount">
+                    {sale.discount_type === 'percentage'
+                      ? `${sale.discount_value}% OFF`
+                      : `₹${sale.discount_value} OFF`
+                    }
+                  </div>
+                  {sale.description && <p className="sale-desc">{sale.description}</p>}
+
+                  <div className="sale-countdown">
+                    <span className="countdown-label">Ends in:</span>
+                    <div className="countdown-boxes">
+                      <div className="countdown-box">
+                        <span className="countdown-num">{String(time.days).padStart(2, '0')}</span>
+                        <span className="countdown-unit">Days</span>
+                      </div>
+                      <span className="countdown-sep">:</span>
+                      <div className="countdown-box">
+                        <span className="countdown-num">{String(time.hours).padStart(2, '0')}</span>
+                        <span className="countdown-unit">Hours</span>
+                      </div>
+                      <span className="countdown-sep">:</span>
+                      <div className="countdown-box">
+                        <span className="countdown-num">{String(time.minutes).padStart(2, '0')}</span>
+                        <span className="countdown-unit">Mins</span>
+                      </div>
+                      <span className="countdown-sep">:</span>
+                      <div className="countdown-box">
+                        <span className="countdown-num">{String(time.seconds).padStart(2, '0')}</span>
+                        <span className="countdown-unit">Secs</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Link to="/perfumes" className="hero-cta-btn" style={{ marginTop: '20px' }}>
+                    Shop Sale <FiArrowRight className="cta-arrow" />
+                  </Link>
+                </div>
+              </div>
+            </Container>
+          </motion.div>
+        );
+      })}
+    </section>
+  );
+};
 
 // ============================================
 // MAIN HOME COMPONENT
@@ -498,6 +612,7 @@ const Home = () => {
   return (
     <div className="home-page">
       <HeroSlider />
+      <SaleBanner />
       <CategoriesSection />
       <FeaturedProducts />
       <BannerSection />

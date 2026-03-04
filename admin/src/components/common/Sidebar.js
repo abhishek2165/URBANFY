@@ -41,11 +41,12 @@ const Sidebar = () => {
           <FiTag /> Coupons
         </Link>
         {/* ====================== */}
+        <Link to="/sales" className={`sidebar-item ${isActive('/sales') ? 'active' : ''}`}><FiZap /> Sales & Offers</Link>
       </nav>
 
       <div className="sidebar-footer">
         <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.72rem', textAlign: 'center' }}>
-          © 2026 URBUNFY
+          © 2026 URBANFY
         </p>
       </div>
     </aside>

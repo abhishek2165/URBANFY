@@ -523,3 +523,160 @@
     height: 180px;
   }
 }
+
+/* ============================================
+   SALE BANNER
+   ============================================ */
+.sale-banner-section {
+  padding: 0;
+}
+
+.sale-banner {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  padding: 50px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.sale-banner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(201,169,110,0.1) 0%, transparent 50%);
+}
+
+.sale-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.sale-banner-image {
+  flex: 0 0 40%;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.sale-banner-image img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.sale-banner-info {
+  flex: 1;
+  color: white;
+}
+
+.sale-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: #ffc107;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 5px 14px;
+  background: rgba(255,193,7,0.1);
+  border-radius: 20px;
+  border: 1px solid rgba(255,193,7,0.3);
+}
+
+.sale-name {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.sale-discount {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #ff6b6b;
+  margin-bottom: 10px;
+}
+
+.sale-desc {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 20px;
+}
+
+.sale-countdown {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.countdown-label {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.5);
+  font-weight: 600;
+}
+
+.countdown-boxes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.countdown-box {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 10px 14px;
+  text-align: center;
+  min-width: 60px;
+  backdrop-filter: blur(5px);
+}
+
+.countdown-num {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #ffc107;
+}
+
+.countdown-unit {
+  display: block;
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+.countdown-sep {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.3);
+}
+
+@media (max-width: 768px) {
+  .sale-banner-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .sale-banner-image {
+    flex: none;
+    width: 100%;
+  }
+  .sale-name {
+    font-size: 1.8rem;
+  }
+  .sale-discount {
+    font-size: 1.5rem;
+  }
+  .sale-countdown {
+    justify-content: center;
+  }
+  .countdown-box {
+    min-width: 50px;
+    padding: 8px 10px;
+  }
+}
