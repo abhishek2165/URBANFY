@@ -11,8 +11,8 @@ import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
 import Orders from './pages/Orders';
 import Users from './pages/Users';
-import Coupons from './pages/Coupons';
-import Sales from './pages/Sales';    // ← हे add करा
+import Coupons from './pages/Coupons'; 
+import Sales from './pages/Sales';   // ← हे add करा
 
 const ProtectedRoute = ({ children, title }) => {
   const { isAuthenticated, loading } = useAdminAuth();
@@ -56,7 +56,7 @@ function App() {
           {/* ===== हे add करा ===== */}
           <Route path="/coupons" element={<ProtectedRoute title="Coupons"><Coupons /></ProtectedRoute>} />
           {/* ====================== */}
-           <Route path="/sales" element={<ProtectedRoute title="Sales"><Sales /></ProtectedRoute>} />
+          <Route path="/sales" element={<ProtectedRoute title="Sales"><Sales /></ProtectedRoute>} />
         </Routes>
       </Router>
     </AdminAuthProvider>

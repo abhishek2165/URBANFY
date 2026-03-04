@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
-  FiGrid, FiPackage, FiShoppingCart, FiUsers, FiTag    // ← FiTag add करा
+  FiGrid, FiPackage, FiShoppingCart, FiUsers, FiTag ,FiZap     // ← FiTag add करा
 } from 'react-icons/fi';
 
 const Sidebar = () => {
@@ -46,7 +46,7 @@ const Sidebar = () => {
 
       <div className="sidebar-footer">
         <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.72rem', textAlign: 'center' }}>
-          © 2026 URBANFY
+          © 2026 URBUNFY
         </p>
       </div>
     </aside>
