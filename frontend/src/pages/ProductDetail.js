@@ -203,47 +203,50 @@ const ProductDetail = () => {
                 transition={{ duration: 0.5 }}
               >
                 <div className="main-image-wrapper">
-                  {product.discount_price && (
-                    <span className="detail-badge">
-                      -{getDiscountPercent()}% OFF
-                    </span>
-                  )}
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      const added = toggleWishlist(product);
-                      if (added) {
-                        toast.success(`${product.name} added to wishlist!`, {
-                          icon: "💝",
-                        });
-                      } else {
-                        toast.info(`${product.name} removed from wishlist`);
-                      }
-                    }}
-                    style={{
-                      color: isInWishlist(product.id) ? "#e94560" : "inherit",
-                      background: isInWishlist(product.id)
-                        ? "#fff0f3"
-                        : "white",
-                    }}
-                  >
-                    <FiHeart
-                      fill={isInWishlist(product.id) ? "#e94560" : "none"}
-                    />
-                  </motion.button>
-                  <img
-    src={productDetailImage(product.image_url)}
-    alt={product.name}
-    className="main-product-image"
-    loading="lazy"
-    onError={(e) => {
-      e.target.src = 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&h=600&fit=crop';
-    }}
-/>
-                </div>
+    {product.discount_price && (
+        <span className="detail-badge">
+            -{getDiscountPercent()}% OFF
+        </span>
+    )}
+    <motion.button
+        className="wishlist-btn-detail"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const added = toggleWishlist(product);
+            if (added) {
+                toast.success(`${product.name} added to wishlist!`, {
+                    icon: "💝",
+                });
+            } else {
+                toast.info(`${product.name} removed from wishlist`);
+            }
+        }}
+        style={{
+            color: isInWishlist(product.id) ? "#e94560" : "inherit",
+            background: isInWishlist(product.id)
+                ? "#fff0f3"
+                : "white",
+        }}
+    >
+        <FiHeart
+            fill={isInWishlist(product.id) ? "#e94560" : "none"}
+        />
+    </motion.button>
+    <div className="image-zoom-container">
+        <img
+            src={product.image_url || "https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&h=600&fit=crop"}
+            alt={product.name}
+            className="main-product-image"
+            loading="lazy"
+            onError={(e) => {
+                e.target.src = 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&h=600&fit=crop';
+            }}
+        />
+    </div>
+</div>
               </motion.div>
             </Col>
 
