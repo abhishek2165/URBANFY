@@ -7,10 +7,36 @@
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="URBANFY - Premium Perfume Store. Shop luxury perfumes, attars, and body mists." />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.png" />
+
+<!-- PRIMARY SEO -->
+    <title>URBANFY Perfumes - Premium Perfumes, Attars & Body Mists | India</title>
+    <meta name="description" content="Shop premium perfumes, traditional attars & fresh body mists at URBANFY. 100% authentic fragrances, free shipping above ₹999. Best perfume store in India." />
+    <meta name="keywords" content="perfumes, attars, body mists, fragrance, perfume online, buy perfume india, urbanfy, premium perfume, best perfume, luxury perfume, attar online, body mist india" />
+    <meta name="author" content="URBANFY Perfumes" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://urbanfyperfumes.in" />
+
+    <!-- OPEN GRAPH (Facebook/WhatsApp/Instagram Share) -->
+    <meta property="og:title" content="URBANFY Perfumes - Premium Fragrances" />
+    <meta property="og:description" content="Shop premium perfumes, traditional attars & fresh body mists. 100% authentic. Free shipping above ₹999." />
+    <meta property="og:image" content="https://urbanfyperfumes.in/logo.png" />
+    <meta property="og:url" content="https://urbanfyperfumes.in" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="URBANFY Perfumes" />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="URBANFY Perfumes - Premium Fragrances" />
+    <meta name="twitter:description" content="Shop premium perfumes, traditional attars & fresh body mists. Free shipping above ₹999." />
+    <meta name="twitter:image" content="https://urbanfyperfumes.in/logo.png" />
+
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -27,22 +53,46 @@
     <!-- <head> tag मध्ये हे add करा -->
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
-    <title>URBANFY - Premium Perfume Store</title>
+   <!-- GOOGLE ANALYTICS (Nantar add kar jeva GA setup hoil) -->
+    <!-- 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    -->
+
+    <!-- STRUCTURED DATA (Google Search Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "URBANFY Perfumes",
+      "description": "Premium perfumes, traditional attars & fresh body mists. 100% authentic fragrances.",
+      "url": "https://urbanfyperfumes.in",
+      "logo": "https://urbanfyperfumes.in/logo.png",
+      "image": "https://urbanfyperfumes.in/logo.png",
+      "priceRange": "₹199 - ₹5999",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "IN"
+      },
+      "sameAs": [],
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://urbanfyperfumes.in/perfumes?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-
+  </body>
+</html>
     
   </body>
 </html>
