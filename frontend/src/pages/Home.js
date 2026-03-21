@@ -22,7 +22,7 @@ const heroSlides = [
     description: "Discover our exquisite collection of premium perfumes crafted from the finest ingredients. Long-lasting fragrances that define elegance.",
     cta: "Explore Perfumes",
     link: "/perfumes",
-    image: "/images/hero/perfume.jpg.jpeg",
+    image: "/images/hero/mavlahero.jpeg",
     color: "#1a1a2e"
   },
   {
@@ -32,7 +32,7 @@ const heroSlides = [
     description: "Experience the rich tradition of authentic attars. Alcohol-free, pure oil-based fragrances with incredible longevity and depth.",
     cta: "Explore Attars",
     link: "/attars",
-    image: "/images/hero/atter.jpg.jpeg",
+    image: "/images/hero/atter2.png",
     color: "#2d1b4e"
   },
   {
@@ -42,7 +42,7 @@ const heroSlides = [
     description: "Stay fresh all day with our refreshing body mists. Light, uplifting scents perfect for everyday wear and active lifestyles.",
     cta: "Explore Body Mists",
     link: "/bodymists",
-    image: "/images/hero/bodymist.jpg.jpeg",
+    image: "/images/hero/nude.jpeg",
     color: "#1b3a4b"
   }
 ];
@@ -164,21 +164,21 @@ const CategoriesSection = () => {
       name: "Perfumes",
       slug: "/perfumes",
       description: "Premium luxury fragrances",
-      image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=400&h=500&fit=crop",
+      image: "/images/hero/mavlahero.jpeg",
       count: "6+ Products"
     },
     {
       name: "Attars",
       slug: "/attars",
       description: "Traditional oil-based scents",
-      image: "https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400&h=500&fit=crop",
+      image: "atter2.png",
       count: "5+ Products"
     },
     {
       name: "Body Mists",
       slug: "/bodymists",
       description: "Refreshing everyday sprays",
-      image: "https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=400&h=500&fit=crop",
+      image: "/images/hero/nude.jpeg",
       count: "6+ Products"
     }
   ];
