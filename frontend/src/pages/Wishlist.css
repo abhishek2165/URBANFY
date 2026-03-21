@@ -222,3 +222,16 @@
     align-items: flex-start;
   }
 }
+
+@media (max-width: 768px) {
+    .wishlist-image {
+        height: 220px;
+        background: #f8f8f8;
+    }
+
+    .wishlist-image img {
+        object-fit: contain !important;
+        padding: 10px !important;
+        background: #f8f8f8 !important;
+    }
+}

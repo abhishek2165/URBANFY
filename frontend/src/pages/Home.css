@@ -680,3 +680,27 @@
     padding: 8px 10px;
   }
 }
+
+@media (max-width: 768px) {
+    .category-image-wrapper {
+        height: 220px;
+        background: #f8f8f8;
+    }
+
+    .category-image-wrapper img {
+        object-fit: contain !important;
+        padding: 10px !important;
+        background: #f8f8f8 !important;
+    }
+
+    .sale-banner-image img {
+        object-fit: contain !important;
+        padding: 10px !important;
+        background: transparent !important;
+    }
+
+    .banner-image {
+        object-fit: contain !important;
+        padding: 10px !important;
+    }
+}

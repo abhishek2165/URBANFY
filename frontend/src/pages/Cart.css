@@ -623,3 +623,16 @@
     padding: 10px;
   }
 }
+
+@media (max-width: 768px) {
+    .cart-item-image {
+        height: 150px;
+        background: #f8f8f8;
+    }
+
+    .cart-item-image img {
+        object-fit: contain !important;
+        padding: 8px !important;
+        background: #f8f8f8 !important;
+    }
+}
