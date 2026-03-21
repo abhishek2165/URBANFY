@@ -171,7 +171,7 @@ const CategoriesSection = () => {
       name: "Attars",
       slug: "/attars",
       description: "Traditional oil-based scents",
-      image: "atter2.png",
+      image: "/images/hero/atter2.png",
       count: "5+ Products"
     },
     {
