@@ -29,8 +29,11 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        settings.FRONTEND_URL,
-        settings.ADMIN_URL,
+        "https://urbanfyperfumes.in",
+        "https://www.urbanfyperfumes.in",
+        "https://admin.urbanfyperfumes.in",
+        "https://urbanfy.vercel.app",
+        "https://urbanfy-2yvn.vercel.app",
         "http://localhost:3000",
         "http://localhost:3001",
     ],
