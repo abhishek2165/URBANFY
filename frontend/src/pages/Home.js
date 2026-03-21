@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 import api from '../services/api';
 import './Home.css';
 import { useWishlist } from '../context/WishlistContext';
+// Home.js top la existing imports nantar he add kar:
+import { productCardImage, saleBannerImage } from '../utils/imageHelper';
 
 // ============================================
 // HERO SLIDER DATA
@@ -300,7 +302,7 @@ const FeaturedProducts = () => {
                     <Link to={`/product/${product.id}`}>
                       <div className="product-image-wrapper">
                         <img
-                          src={product.image_url || `https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=400&fit=crop`}
+                          src={productCardImage(product.image_url)}
                           alt={product.name}
                         />
                         {product.discount_price && (
@@ -553,7 +555,7 @@ const SaleBanner = () => {
               <div className="sale-banner-content">
                 {sale.banner_image && (
                   <div className="sale-banner-image">
-                    <img src={sale.banner_image} alt={sale.name} />
+                    <img src={saleBannerImage(sale.banner_image)} alt={sale.name} />
                   </div>
                 )}
                 <div className="sale-banner-info">

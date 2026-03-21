@@ -10,7 +10,8 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import './Cart.css';
-
+// Cart.js - TOP la existing imports nantar he add kar:
+import { cartImage } from '../utils/imageHelper';
 const Cart = () => {
   const {
     cartItems,
@@ -159,9 +160,13 @@ const Cart = () => {
                       {/* Product Image */}
                       <Link to={`/product/${item.id}`} className="cart-item-image">
                         <img
-                          src={item.image_url || 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=200&h=200&fit=crop'}
-                          alt={item.name}
-                        />
+    src={cartImage(item.image_url)}
+    alt={item.name}
+    loading="lazy"
+    onError={(e) => {
+      e.target.src = 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=200&h=200&fit=crop';
+    }}
+/>
                       </Link>
 
                       {/* Product Details */}

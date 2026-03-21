@@ -7,6 +7,8 @@ import { useWishlist } from "../context/WishlistContext";
 import { useCart } from "../context/CartContext";
 import { toast } from "react-toastify";
 import "./Wishlist.css";
+// Wishlist.js - TOP la existing imports nantar he add kar:
+import { productCardImage } from '../utils/imageHelper';
 
 const Wishlist = () => {
   const { wishlistItems, removeFromWishlist, clearWishlist, wishlistCount } =
@@ -134,12 +136,13 @@ const Wishlist = () => {
                     <Link to={`/product/${product.id}`}>
                       <div className="wishlist-image">
                         <img
-                          src={
-                            product.image_url ||
-                            "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=400&fit=crop"
-                          }
-                          alt={product.name}
-                        />
+    src={productCardImage(product.image_url)}
+    alt={product.name}
+    loading="lazy"
+    onError={(e) => {
+      e.target.src = 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=400&fit=crop';
+    }}
+/>
                         {product.discount_price && (
                           <span className="wishlist-badge">
                             -

@@ -21,6 +21,8 @@ import { toast } from "react-toastify";
 import api from "../services/api";
 import "./ProductDetail.css";
 import { useWishlist } from "../context/WishlistContext";
+// ProductDetail.js - TOP la existing imports nantar he add kar:
+import { productDetailImage, productCardImage } from '../utils/imageHelper';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -233,13 +235,14 @@ const ProductDetail = () => {
                     />
                   </motion.button>
                   <img
-                    src={
-                      product.image_url ||
-                      "https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&h=600&fit=crop"
-                    }
-                    alt={product.name}
-                    className="main-product-image"
-                  />
+    src={productDetailImage(product.image_url)}
+    alt={product.name}
+    className="main-product-image"
+    loading="lazy"
+    onError={(e) => {
+      e.target.src = 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&h=600&fit=crop';
+    }}
+/>
                 </div>
               </motion.div>
             </Col>
@@ -704,12 +707,13 @@ const SimilarProductCard = ({ product }) => {
       <Link to={`/product/${product.id}`}>
         <div className="product-image-wrapper">
           <img
-            src={
-              product.image_url ||
-              "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=400&fit=crop"
-            }
-            alt={product.name}
-          />
+    src={productCardImage(product.image_url)}
+    alt={product.name}
+    loading="lazy"
+    onError={(e) => {
+      e.target.src = 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=400&fit=crop';
+    }}
+/>
           {product.discount_price && (
             <span className="product-badge">
               -

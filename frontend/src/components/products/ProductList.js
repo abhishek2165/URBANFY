@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import api from '../../services/api';
 import './ProductList.css';
 import { useWishlist } from '../../context/WishlistContext';
+import { productCardImage, productListImage } from '../../utils/imageHelper';
 
 const ProductList = ({ categorySlug, categoryName, categoryDescription }) => {
   const [products, setProducts] = useState([]);
@@ -449,9 +450,13 @@ const GridProductCard = ({ product, onAddToCart, getDiscountPercent }) => {
       <Link to={`/product/${product.id}`}>
         <div className="product-image-wrapper">
           <img
-            src={product.image_url || 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=400&fit=crop'}
-            alt={product.name}
-          />
+    src={productCardImage(product.image_url)}
+    alt={product.name}
+    loading="lazy"
+    onError={(e) => {
+        e.target.src = 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=400&fit=crop';
+    }}
+/>
           {product.discount_price && (
             <span className="product-badge">
               -{getDiscountPercent(product.price, product.discount_price)}%
@@ -573,9 +578,13 @@ const ListProductCard = ({ product, onAddToCart, getDiscountPercent }) => {
           <Link to={`/product/${product.id}`}>
             <div className="list-image-wrapper">
               <img
-                src={product.image_url || 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=400&fit=crop'}
-                alt={product.name}
-              />
+    src={productListImage(product.image_url)}
+    alt={product.name}
+    loading="lazy"
+    onError={(e) => {
+        e.target.src = 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=400&fit=crop';
+    }}
+/>
               {product.discount_price && (
                 <span className="product-badge">
                   -{getDiscountPercent(product.price, product.discount_price)}%
