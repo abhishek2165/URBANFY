@@ -66,6 +66,7 @@ async def get_products(
     min_price: Optional[float] = Query(None, description="Minimum price"),
     max_price: Optional[float] = Query(None, description="Maximum price"),
     featured: Optional[bool] = Query(None, description="Featured only"),
+    volume: Optional[str] = Query(None, description="Filter by volume"),
     sort: Optional[str] = Query("newest", description="Sort: newest, price_low, price_high, rating, name"),
     page: int = Query(1, ge=1, description="Page number"),
     per_page: int = Query(12, ge=1, le=50, description="Items per page"),
@@ -106,6 +107,13 @@ async def get_products(
             query = query.filter(Product.price >= min_price)
         if max_price is not None:
             query = query.filter(Product.price <= max_price)
+
+            # ✅ NEW: Volume Filter
+        if volume:
+            query = query.filter(Product.volume == volume)
+
+        if featured is not None:
+            query = query.filter(Product.is_featured == featured)
 
         # Filter featured
         if featured is not None:

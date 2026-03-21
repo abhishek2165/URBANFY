@@ -30,12 +30,13 @@ const ProductList = ({ categorySlug, categoryName, categoryDescription }) => {
   const [maxPrice, setMaxPrice] = useState('');
   const [gender, setGender] = useState('');
   const [brand, setBrand] = useState('');
+  const [volume, setVolume] = useState('');
 
   const { addToCart } = useCart();
 
   useEffect(() => {
     fetchProducts();
-  }, [categorySlug, currentPage, sort, gender, brand]);
+  }, [categorySlug, currentPage, sort, gender, brand, volume]);
 
   useEffect(() => {
     const urlSearch = searchParams.get('search');
@@ -58,6 +59,7 @@ const ProductList = ({ categorySlug, categoryName, categoryDescription }) => {
       if (searchQuery || search) params.search = searchQuery || search;
       if (gender) params.gender = gender;
       if (brand) params.brand = brand;
+      if (volume) params.volume = volume;
       if (minPrice) params.min_price = parseFloat(minPrice);
       if (maxPrice) params.max_price = parseFloat(maxPrice);
 
@@ -91,6 +93,7 @@ const ProductList = ({ categorySlug, categoryName, categoryDescription }) => {
     setMaxPrice('');
     setGender('');
     setBrand('');
+    setVolume('');
     setCurrentPage(1);
     setSearchParams({});
     setTimeout(() => fetchProducts(''), 100);
@@ -106,7 +109,7 @@ const ProductList = ({ categorySlug, categoryName, categoryDescription }) => {
     return Math.round(((price - discountPrice) / price) * 100);
   };
 
-  const hasActiveFilters = search || minPrice || maxPrice || gender || brand || sort !== 'newest';
+  const hasActiveFilters = search || minPrice || maxPrice || gender || brand || volume || sort !== 'newest';
 
   return (
     <div className="product-list-page">
@@ -206,6 +209,33 @@ const ProductList = ({ categorySlug, categoryName, categoryDescription }) => {
                       <span className="filter-option-label">
                         {g === '' ? 'All' : g.charAt(0).toUpperCase() + g.slice(1)}
                       </span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Volume Filter */}
+              <div className="filter-group">
+                <h6 className="filter-title">Volume</h6>
+                <div className="filter-options">
+                  {[
+                    { value: '', label: 'All Volumes' },
+                    { value: '10ml', label: '10ml' },
+                    { value: '20ml', label: '20ml' },
+                    { value: '30ml', label: '30ml' },
+                    { value: '50ml', label: '50ml' },
+                    { value: '100ml', label: '100ml' },
+                    { value: '150ml', label: '150ml' },
+                    { value: '200ml', label: '200ml' },
+                  ].map((v) => (
+                    <label key={v.value || 'all'} className="filter-option">
+                      <input
+                        type="radio"
+                        name="volume"
+                        checked={volume === v.value}
+                        onChange={() => { setVolume(v.value); setCurrentPage(1); }}
+                      />
+                      <span className="filter-option-label">{v.label}</span>
                     </label>
                   ))}
                 </div>
@@ -314,6 +344,14 @@ const ProductList = ({ categorySlug, categoryName, categoryDescription }) => {
                     <FiX onClick={() => setGender('')} />
                   </span>
                 )}
+
+                {volume && (
+                  <span className="filter-tag">
+                    Volume: {volume}
+                    <FiX onClick={() => setVolume('')} />
+                  </span>
+                )}
+
                 {(minPrice || maxPrice) && (
                   <span className="filter-tag">
                     ₹{minPrice || '0'} - ₹{maxPrice || '∞'}
