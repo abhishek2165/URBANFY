@@ -85,8 +85,4 @@ def verify_admin_token(token: str) -> Optional[dict]:
     except JWTError:
         return None
 
-        @router.get("/test-sms")
-async def test_sms():
-    from app.utils.helpers import send_sms
-    result = await send_sms("7972051146", "URBANFY: Test SMS working!")
-    return result
+        
