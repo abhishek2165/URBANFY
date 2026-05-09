@@ -20,8 +20,8 @@ const AboutHero = () => {
         <Row className="align-items-center about-hero-row">
           <Col lg={6}>
             <motion.div
-              className="about-hero-text"
-              initial={{ opacity: 0, x: -50 }}
+              className="about-hero-text" 
+              initial={{ opacity: 0, x: -50 }} 
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7 }}
             >

@@ -32,7 +32,7 @@ async def send_sms(phone: str, message: str):
         }
 
         payload = {
-            "route": "q",
+            "route": "v",
             "message": message,
             "language": "english",
             "flash": 0,
